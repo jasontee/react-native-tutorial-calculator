@@ -33,7 +33,8 @@ export default class ReactCalculator extends Component {
           previousInputValue: 0,
           inputValue: 0,
           selectedSymbol: null,
-          isDecimal : null
+          isDecimal : null,
+          memorizedNumber: 0
       }
 
       this.initialState = this.state;
@@ -165,6 +166,30 @@ export default class ReactCalculator extends Component {
                 inputValue: this.state.inputValue + str
             });
             break;
+        case 'MC':
+            this.setState({
+                memorizedNumber: 0
+            });
+            break;
+        case 'MR':
+            this.setState({
+                inputValue: this.state.memorizedNumber
+            });
+            break;
+        case 'MS':
+            this.setState({
+                memorizedNumber: this.state.inputValue,
+                inputValue: 0
+            });
+            break;
+        case 'M+':
+            memorizedNumber = this.state.memorizedNumber;
+            inputValue = this.state.inputValue;
+
+            this.setState({
+                inputValue: eval(memorizedNumber + "+" + inputValue)
+            });
+            break;
+        }
     }
-  }
 }
