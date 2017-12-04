@@ -34,7 +34,8 @@ export default class ReactCalculator extends Component {
           inputValue: 0,
           selectedSymbol: null,
           isDecimal : null,
-          memorizedNumber: 0
+          memorizedNumber: 0,
+          history : ''
       }
 
       this.initialState = this.state;
@@ -44,6 +45,7 @@ export default class ReactCalculator extends Component {
     return (
       <View style={Style.rootContainer}>
           <View style={Style.displayContainer}>
+            <Text style={Style.historyDisplayText}>{this.state.history}</Text>
             <Text style={Style.displayText}>{this.state.inputValue}</Text>
           </View>
           <View style={Style.inputContainer}>
@@ -108,6 +110,7 @@ export default class ReactCalculator extends Component {
       this.setState({
           inputValue: inputValue,
           isDecimal: isDecimal,
+          history: this.state.history + inputValue
       })
   }
 
@@ -121,7 +124,8 @@ export default class ReactCalculator extends Component {
                 selectedSymbol: str,
                 previousInputValue: this.state.inputValue,
                 inputValue: 0,
-                isDecimal: null
+                isDecimal: null,
+                history: this.state.history + str
             });
             break;
         case '=':
@@ -133,11 +137,14 @@ export default class ReactCalculator extends Component {
                 return;
             }
 
+            result = eval(previousInputValue + symbol + inputValue);
+
             this.setState({
                 previousInputValue: 0,
-                inputValue: eval(previousInputValue + symbol + inputValue),
+                inputValue: result,
                 selectedSymbol: null,
-                isDecimal: null
+                isDecimal: null,
+                history: this.state.history + str + result
             });
             break;
         case 'C':
@@ -153,17 +160,18 @@ export default class ReactCalculator extends Component {
                 isDecimal: this.initialState.isDecimal,
                 selectedSymbol: this.initialState.selectedSymbol,
                 previousInputValue: this.initialState.previousInputValue,
-                inputValue: this.initialState.inputValue
+                inputValue: this.initialState.inputValue,
+                history: this.initialState.history
             });
             break;
         case '.':
-
             let isDecimal = this.state.isDecimal;
             if(isDecimal) break;
 
             this.setState({
                 isDecimal: true,
-                inputValue: this.state.inputValue + str
+                inputValue: this.state.inputValue + str,
+                history: this.state.history + this.state.inputValue
             });
             break;
         case 'MC':

@@ -5,13 +5,8 @@ var Style = StyleSheet.create({
         flex: 1
     },
 
-    displayContainer: {
-        flex: 2,
-        backgroundColor: '#193441'
-    },
-
     inputContainer: {
-        flex: 8,
+        flex: 7,
         backgroundColor: '#3E606F'
     },
 
@@ -50,6 +45,19 @@ var Style = StyleSheet.create({
 
     inputButtonHighlighted: {
       backgroundColor: '#193441'
+    },
+
+    historyDisplayContainer: {
+      flex: 1,
+      backgroundColor: '#193441'
+    },
+
+    historyDisplayText: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'right',
+        padding: 20
     },
 });
 
