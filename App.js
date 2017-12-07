@@ -35,7 +35,8 @@ export default class ReactCalculator extends Component {
           selectedSymbol: null,
           isDecimal : null,
           memorizedNumber: 0,
-          history : ''
+          history : '',
+          expression: ''
       }
 
       this.initialState = this.state;
@@ -156,13 +157,7 @@ export default class ReactCalculator extends Component {
             });
             break;
         case 'CE':
-            this.setState({
-                isDecimal: this.initialState.isDecimal,
-                selectedSymbol: this.initialState.selectedSymbol,
-                previousInputValue: this.initialState.previousInputValue,
-                inputValue: this.initialState.inputValue,
-                history: this.initialState.history
-            });
+            this.setState(this.initialState);
             break;
         case '.':
             let isDecimal = this.state.isDecimal;
